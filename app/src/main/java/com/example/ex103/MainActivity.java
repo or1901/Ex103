@@ -1,5 +1,6 @@
 package com.example.ex103;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.os.Bundle;
  * of the series in a list view. Also shows the data of each series value when it's clicked.
  */
 public class MainActivity extends AppCompatActivity {
+    AlertDialog.Builder adb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

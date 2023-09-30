@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Series type"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/dgSpinner"
+        android:layout_width="200dp"
+        android:layout_height="38dp"
+        android:layout_weight="1" />
+
+    <Space
+        android:layout_width="200dp"
+        android:layout_height="15dp" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="First value"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/dgFirstValueEt"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="Enter first value"
+        android:inputType="number|numberDecimal|numberSigned" />
+
+    <Space
+        android:layout_width="200dp"
+        android:layout_height="15dp" />
+
+    <TextView
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Difference/Quotient"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/dgDiffEt"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="Enter d or q of the series"
+        android:inputType="number|numberDecimal|numberSigned" />
+
+</LinearLayout>
