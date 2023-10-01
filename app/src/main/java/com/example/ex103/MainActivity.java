@@ -20,10 +20,9 @@ import android.widget.Spinner;
  * Collects data of a mathematical series in an alert dialog and displays the 20 first values
  * of the series in a list view. Also shows the data of each series value when it's clicked.
  */
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class MainActivity extends AppCompatActivity{
     AlertDialog.Builder adb;
     LinearLayout dataDialog;
-    Spinner dgSpinner;
     EditText dgFirstValueEt, dgDiffEt;
     ArrayAdapter<String> spinnerAdp;
     String[] seriesTypes = {"Arithmetic", "Geometric"};
@@ -55,12 +54,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void getSeriesData(View view) {
         dataDialog = (LinearLayout) getLayoutInflater().inflate(R.layout.data_dialog, null);
 
-        dgSpinner = (Spinner) dataDialog.findViewById(R.id.dgSpinner);
         dgFirstValueEt = (EditText) dataDialog.findViewById(R.id.dgFirstValueEt);
         dgDiffEt = (EditText) dataDialog.findViewById(R.id.dgDiffEt);
 
-        dgSpinner.setAdapter(spinnerAdp);
-        dgSpinner.setOnItemSelectedListener(this);
 
         adb = new AlertDialog.Builder(this);
 
@@ -72,16 +68,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         adb.setNegativeButton("Cancel", onDialogBtnClick);
 
         adb.show();
-
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }
