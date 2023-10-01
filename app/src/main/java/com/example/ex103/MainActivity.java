@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     RadioButton dgAriRb, dgGeoRb;
     int seriesType;
     String firstValueStr, diffStr;
-    double firstValue, diff;
+    double firstValue, diff, seriesSum;
     ListView lv;
     ArrayAdapter<Double> adp;
     TextView xOneTv, dTv, nTv, snTv;
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         seriesType = 0;
         firstValueStr = diffStr = "";
-        firstValue = diff = 0;
+        firstValue = diff = seriesSum = 0;
         seriesArr = new Double[20];
 
         lv = (ListView) findViewById(R.id.lv);
@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         adp = new ArrayAdapter<Double>(MainActivity.this,
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
                 seriesArr);
+
+        lv.setOnItemClickListener(this);
     }
 
     /**
@@ -203,8 +205,43 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         firstValueStr = diffStr = "";
     }
 
+    /**
+     * This function displays information about a chosen value from the list view(the series).
+     * <p>
+     *
+     * @param parent The AdapterView where the click happened.
+     * @param view The view within the AdapterView that was clicked (this
+     *            will be a view provided by the adapter)
+     * @param position The position of the view in the adapter.
+     * @param id The row id of the item that was clicked.
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        nTv.setText((position + 1) + "");
 
+        seriesSum = calcSeriesSum(this.seriesType, position + 1, this.firstValue, this.diff);
+        snTv.setText("" + seriesSum);
+    }
+
+    /**
+     * This function calculates the sum of a given series, from the first value of it to a given
+     * value in the series.
+     * <p>
+     *
+     * @param type The type of the series - 0 for arithmetic, 1 for geometric.
+     * @param n The index of the given value in the series.
+     * @param a1 The first value of the series.
+     * @param d The difference/quotient of the series.
+     * @return The sum of the series from a1 to an.
+     */
+    public double calcSeriesSum(int type, int n, double a1, double d){
+        double Sn = 0;
+
+        if(type == 0)
+            Sn = ((2 * a1 + d * (n - 1)) * n) / 2;
+        else
+            Sn = a1 * ((Math.pow(d, n) - 1) / (d - 1));
+
+        return Sn;
     }
 }
