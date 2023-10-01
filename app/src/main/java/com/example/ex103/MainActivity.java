@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ArrayAdapter<Double> adp;
     TextView xOneTv, dTv, nTv, snTv;
     Double[] seriesArr;
+    Intent si;
     DialogInterface.OnClickListener onDialogBtnClick = new DialogInterface.OnClickListener() {
 
         /**
@@ -243,5 +245,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Sn = a1 * ((Math.pow(d, n) - 1) / (d - 1));
 
         return Sn;
+    }
+
+    /**
+     * This function moves the user to the credits activity.
+     * <p>
+     *
+     * @param view The button that was clicked in order to move to the credits activity.
+     */
+    public void nextToCredits(View view) {
+        si = new Intent(this, CreditsActivity.class);
+        startActivity(si);
     }
 }

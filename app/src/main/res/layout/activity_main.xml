@@ -207,6 +207,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="6"
                 android:backgroundTint="#ADD8E6"
+                android:onClick="nextToCredits"
                 android:text="Credits"
                 android:textColorHint="#673AB7" />
 
