@@ -36,17 +36,18 @@
         <RadioGroup
             android:layout_width="220dp"
             android:layout_height="48dp"
+            android:checkedButton="@id/dgAriRb"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/dgAriBtn"
+                android:id="@+id/dgAriRb"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Arithmetic" />
 
             <RadioButton
-                android:id="@+id/dgGeoBtn"
+                android:id="@+id/dgGeoRb"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

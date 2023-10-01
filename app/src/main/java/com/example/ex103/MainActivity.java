@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 
 /**
@@ -24,9 +25,9 @@ public class MainActivity extends AppCompatActivity{
     AlertDialog.Builder adb;
     LinearLayout dataDialog;
     EditText dgFirstValueEt, dgDiffEt;
-    ArrayAdapter<String> spinnerAdp;
-    String[] seriesTypes = {"Arithmetic", "Geometric"};
-
+    RadioButton dgAriRb, dgGeoRb;
+    int seriesType;
+    String firstValueStr, diffStr;
     DialogInterface.OnClickListener onDialogBtnClick = new DialogInterface.OnClickListener() {
 
         @Override
@@ -40,9 +41,8 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        spinnerAdp = new ArrayAdapter<String>(this,
-                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, seriesTypes);
-
+        seriesType = 1;
+        firstValueStr = diffStr = "";
     }
 
     /**
@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity{
 
         dgFirstValueEt = (EditText) dataDialog.findViewById(R.id.dgFirstValueEt);
         dgDiffEt = (EditText) dataDialog.findViewById(R.id.dgDiffEt);
-
+        dgAriRb = (RadioButton) dataDialog.findViewById(R.id.dgAriRb);
+        dgGeoRb = (RadioButton) dataDialog.findViewById(R.id.dgGeoRb);
 
         adb = new AlertDialog.Builder(this);
 
@@ -67,7 +68,14 @@ public class MainActivity extends AppCompatActivity{
         adb.setNeutralButton("Reset", onDialogBtnClick);
         adb.setNegativeButton("Cancel", onDialogBtnClick);
 
-        adb.show();
+        // Resets the fields of data to the current displayed series values
+        if(seriesType == 0)
+            dgAriRb.setChecked(true);
+        else
+            dgGeoRb.setChecked(true);
+        dgFirstValueEt.setText(firstValueStr);
+        dgDiffEt.setText(diffStr);
 
+        adb.show();
     }
 }
