@@ -10,8 +10,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * @author Ori Roitzaid <or1901 @ bs.amalnet.k12.il>
@@ -21,17 +24,61 @@ import android.widget.Spinner;
  * Collects data of a mathematical series in an alert dialog and displays the 20 first values
  * of the series in a list view. Also shows the data of each series value when it's clicked.
  */
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     AlertDialog.Builder adb;
     LinearLayout dataDialog;
     EditText dgFirstValueEt, dgDiffEt;
     RadioButton dgAriRb, dgGeoRb;
     int seriesType;
     String firstValueStr, diffStr;
+    double firstValue, diff;
+    ListView lv;
+    ArrayAdapter<Double> adp;
+    TextView xOneTv, dTv, nTv, snTv;
+    Double[] seriesArr;
     DialogInterface.OnClickListener onDialogBtnClick = new DialogInterface.OnClickListener() {
 
+        /**
+         * This function reacts to the click on one of the dialog buttons - resets the series data,
+         * or cancels the action, or calculates the series values.
+         * <p>
+         *
+         * @param dialog The dialog that received the click.
+         * @param which The constant of the button that was clicked.
+         */
         @Override
         public void onClick(DialogInterface dialog, int which) {
+            // Apply button
+            if(which == DialogInterface.BUTTON_POSITIVE) {
+                // Saves the data of the series
+                seriesType = getSeriesType();
+                firstValueStr = dgFirstValueEt.getText().toString();
+                diffStr = dgDiffEt.getText().toString();
+
+                firstValue = Double.parseDouble(firstValueStr);
+                diff = Double.parseDouble(diffStr);
+
+                if(isDataValid(firstValueStr, diffStr)){
+                    createSeriesArr(seriesType, firstValue, diff, seriesArr);
+                    lv.setAdapter(adp);
+
+                    xOneTv.setText(firstValueStr);
+                    dTv.setText(diffStr);
+                }
+                else
+                    Toast.makeText(MainActivity.this, "Invalid data, please try again",
+                            Toast.LENGTH_LONG).show();
+            }
+
+            // Cancel button
+            else if(which == DialogInterface.BUTTON_NEGATIVE) {
+                dialog.cancel();
+            }
+
+            // Reset button
+            else{
+                resetSeriesData();
+            }
 
         }
     };
@@ -41,8 +88,20 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        seriesType = 1;
+        seriesType = 0;
         firstValueStr = diffStr = "";
+        firstValue = diff = 0;
+        seriesArr = new Double[20];
+
+        lv = (ListView) findViewById(R.id.lv);
+        xOneTv = (TextView) findViewById(R.id.xOneTv);
+        dTv = (TextView) findViewById(R.id.dTv);
+        nTv = (TextView) findViewById(R.id.nTv);
+        snTv = (TextView) findViewById(R.id.snTv);
+
+        adp = new ArrayAdapter<Double>(MainActivity.this,
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+                seriesArr);
     }
 
     /**
@@ -63,6 +122,7 @@ public class MainActivity extends AppCompatActivity{
 
         adb.setView(dataDialog);
         adb.setTitle("Series data input");
+        adb.setCancelable(false);
 
         adb.setPositiveButton("Apply", onDialogBtnClick);
         adb.setNeutralButton("Reset", onDialogBtnClick);
@@ -77,5 +137,74 @@ public class MainActivity extends AppCompatActivity{
         dgDiffEt.setText(diffStr);
 
         adb.show();
+    }
+
+    /**
+     * This function checks if the data of the series is valid(there isn't an empty field).
+     * <p>
+     *
+     * @param firstValue The first value of the checked series.
+     * @param diff The d/q of the checked series.
+     * @return Whether the series data is valid, or not.
+     */
+    public boolean isDataValid(String firstValue, String diff) {
+        return (!firstValue.equals("")) && (!diff.equals(""));
+    }
+
+    /**
+     * This function calculates the 20 first values of a given series, and saves them into an array.
+     * <p>
+     *
+     * @param type The type of the series - 0 for arithmetic, 1 for geometric.
+     * @param first The first value of the series.
+     * @param d The difference/quotient of the series.
+     * @param arr The array to save the values of the series in.
+     */
+    public void createSeriesArr(int type, double first, double d, Double[] arr){
+        if(type == 0){
+            for(int i = 0; i < 20; i++) {
+                arr[i] = first + d * i;
+            }
+        }
+        else{
+            for(int i = 0; i < 20; i++) {
+                arr[i] = first * Math.pow(d, i);
+            }
+        }
+    }
+
+    /**
+     * This function converts the chosen series type into a number, and returns it.
+     * <p>
+     *
+     * @return 0 if the series is arithmetic, 1 if it is geometric.
+     */
+    public int getSeriesType(){
+        if(dgAriRb.isChecked())
+            return 0;
+        else
+            return 1;
+    }
+
+    /**
+     * This function resets the data of the current series in all of the relevant places in the app.
+     */
+    public void resetSeriesData() {
+        lv.setAdapter(null);
+
+        dgFirstValueEt.setText("");
+        dgDiffEt.setText("");
+
+        xOneTv.setText("");
+        dTv.setText("");
+        nTv.setText("");
+        snTv.setText("");
+
+        firstValueStr = diffStr = "";
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }
