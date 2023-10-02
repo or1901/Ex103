@@ -57,19 +57,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 firstValueStr = dgFirstValueEt.getText().toString();
                 diffStr = dgDiffEt.getText().toString();
 
-                firstValue = Double.parseDouble(firstValueStr);
-                diff = Double.parseDouble(diffStr);
-
                 if(isDataValid(firstValueStr, diffStr)){
+                    firstValue = Double.parseDouble(firstValueStr);
+                    diff = Double.parseDouble(diffStr);
+
                     createSeriesArr(seriesType, firstValue, diff, seriesArr);
                     lv.setAdapter(adp);
 
                     xOneTv.setText(firstValueStr);
                     dTv.setText(diffStr);
                 }
-                else
-                    Toast.makeText(MainActivity.this, "Invalid data, please try again",
+                else {
+                    Toast.makeText(MainActivity.this, "Invalid data, please try again!",
                             Toast.LENGTH_LONG).show();
+                }
             }
 
             // Cancel button
