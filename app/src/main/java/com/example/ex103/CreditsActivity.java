@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,5 +64,15 @@ public class CreditsActivity extends AppCompatActivity {
             creditsTv.setText(R.string.softwareCreditStr);
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * This function returns the user to the main activity.
+     * <p>
+     *
+     * @param view The view object of the button that was clicked in order to go back.
+     */
+    public void backToMain(View view) {
+        finish();
     }
 }
