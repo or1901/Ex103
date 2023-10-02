@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Ex103</string>
+    <string name="personalCreditStr">Credits to the creator Ori Roitzaid, and to Albert Levy and
+        Itzhak Ben Shitrit the great teachers.</string>
+    <string name="educationCreditStr">Credits to Makif Zain School where I learn today,
+        and where I got this assignment.</string>
+    <string name="softwareCreditStr">Credits to Android Studio that I use their platform to develop
+        this app, and more many apps than this.</string>
 </resources>

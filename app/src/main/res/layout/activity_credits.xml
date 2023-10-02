@@ -55,9 +55,11 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/creditsTv"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="10"
+            android:text="Choose a credits option from the menu"
             android:textSize="24sp" />
 
         <Space
@@ -88,7 +90,8 @@
             android:layout_weight="4.5"
             android:backgroundTint="#ADD8E6"
             android:onClick="backToMain"
-            android:text="Back" />
+            android:text="Back"
+            android:textColor="#FFFFFF" />
 
         <Space
             android:layout_width="0dp"

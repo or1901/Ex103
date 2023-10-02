@@ -164,7 +164,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_weight="4.5"
             android:orientation="horizontal">
 
             <Space
@@ -178,7 +178,8 @@
                 android:layout_weight="3"
                 android:backgroundTint="#00008B"
                 android:onClick="getSeriesData"
-                android:text="Enter Data" />
+                android:text="Enter Data"
+                android:textColor="#FFFFFF" />
 
             <Space
                 android:layout_width="0dp"
@@ -194,7 +195,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.5"
+            android:layout_weight="2.7"
             android:orientation="horizontal">
 
             <Space
@@ -205,10 +206,11 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="6"
+                android:layout_weight="7"
                 android:backgroundTint="#ADD8E6"
                 android:onClick="nextToCredits"
                 android:text="Credits"
+                android:textColor="#FFFFFF"
                 android:textColorHint="#673AB7" />
 
             <Space
@@ -228,5 +230,5 @@
     <Space
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="0.7" />
 </LinearLayout>
