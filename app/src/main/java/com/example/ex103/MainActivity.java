@@ -1,11 +1,14 @@
 package com.example.ex103;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -66,10 +69,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                     xOneTv.setText(firstValueStr);
                     dTv.setText(diffStr);
+                    nTv.setText("");
+                    snTv.setText("");
                 }
                 else {
                     Toast.makeText(MainActivity.this, "Invalid data, please try again!",
                             Toast.LENGTH_LONG).show();
+                    firstValueStr = "";
+                    diffStr = "";
                 }
             }
 
@@ -249,13 +256,35 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     /**
-     * This function moves the user to the credits activity.
+     * This function presents the options menu for moving between activities.
      * <p>
      *
-     * @param view The button that was clicked in order to move to the credits activity.
+     * @param menu The options menu in which you place your items.
+     * @return true in order to show the menu, otherwise false.
      */
-    public void nextToCredits(View view) {
-        si = new Intent(this, CreditsActivity.class);
-        startActivity(si);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * This function reacts to the user choice in the options menu - it moves to the chosen
+     * activity from the menu.
+     * <p>
+     *
+     * @param item The menu item that was selected.
+     * @return Must return true for the menu to react.
+     */
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        int id = item.getItemId();
+
+        if(id == R.id.menuCredits){
+            si = new Intent(this, CreditsActivity.class);
+            startActivity(si);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
