@@ -75,8 +75,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 else {
                     Toast.makeText(MainActivity.this, "Invalid data, please try again!",
                             Toast.LENGTH_LONG).show();
-                    firstValueStr = "";
-                    diffStr = "";
                 }
             }
 
@@ -152,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     /**
-     * This function checks if the data of the series is valid(there isn't an empty field).
+     * This function checks if the data of the series is valid.
      * <p>
      *
      * @param firstValue The first value of the checked series.
@@ -160,7 +158,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
      * @return Whether the series data is valid, or not.
      */
     public boolean isDataValid(String firstValue, String diff) {
-        return (!firstValue.equals("")) && (!diff.equals(""));
+        return (!firstValue.equals("")) && (!firstValue.equals("-"))
+                && (!firstValue.equals(".")) && (!firstValue.equals("-."))
+                && (!diff.equals("")) && (!diff.equals("-"))
+                && (!diff.equals(".")) && (!diff.equals("-."));
     }
 
     /**
